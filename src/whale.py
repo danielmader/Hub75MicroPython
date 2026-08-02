@@ -1,5 +1,6 @@
 import bouncer
 
+
 class SquirtyTheWhale():
 
     def __init__(self, matrix, hub75):

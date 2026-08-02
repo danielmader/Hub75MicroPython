@@ -1,5 +1,6 @@
-from machine import Pin, SoftSPI, freq
 from time import sleep_us
+
+from machine import Pin, SoftSPI, freq
 
 #freq(160000000)  # default NodeMCU ESP-32S v1.1
 freq(240000000)
@@ -74,12 +75,18 @@ class Hub75Spi:
         self.blue1_mosi_pin = Pin(config.blue1_pin_number)
         self.blue2_mosi_pin = Pin(config.blue2_pin_number)
 
-        self.red1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.red1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
-        self.red2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.red2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
-        self.green1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.green1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
-        self.green2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.green2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
-        self.blue1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.blue1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
-        self.blue2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0, sck=Pin(config.clock_pin_number), mosi=self.blue2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.red1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                sck=Pin(config.clock_pin_number), mosi=self.red1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.red2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                sck=Pin(config.clock_pin_number), mosi=self.red2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.green1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                  sck=Pin(config.clock_pin_number), mosi=self.green1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.green2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                  sck=Pin(config.clock_pin_number), mosi=self.green2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.blue1_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                 sck=Pin(config.clock_pin_number), mosi=self.blue1_mosi_pin, miso=Pin(config.spi_miso_pin_number))
+        self.blue2_spi = SoftSPI(baudrate=config.spi_baud_rate, polarity=1, phase=0,
+                                 sck=Pin(config.clock_pin_number), mosi=self.blue2_mosi_pin, miso=Pin(config.spi_miso_pin_number))
 
     def set_row_select(self, row):
         '''

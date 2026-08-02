@@ -64,3 +64,45 @@ while True:
     hub75spi.display_data()
 ````
 
+
+## Development: linting & type checking (this fork)
+
+The configuration files (`pyrightconfig.json`, `pyproject.toml`,
+`scripts/update-typeshed.sh`) expect a venv at `.venv` with **Python 3.11**:
+
+    ## Option A: pip/venv
+    python3.11 -m venv .venv
+    .venv/bin/pip install -r requirements.txt
+
+    ## Option B: uv
+    uv venv --python 3.11 .venv
+    uv pip install -r requirements.txt
+
+    ## Both cases: generate the combined typeshed for ty
+    ./scripts/update-typeshed.sh
+
+`requirements.txt` installs the MicroPython stubs (`micropython-esp32-stubs`),
+the type checkers `basedpyright` (same engine as Pylance) and `ty`, the linter
+`ruff`, `mpremote` for deployment, and numpy/opencv for the host-side
+`Utilities/ImageTo3BitList.py` script.
+
+Run the checkers:
+
+    .venv/bin/basedpyright           ## config: pyrightconfig.json
+    .venv/bin/ty check               ## config: pyproject.toml [tool.ty]
+    .venv/bin/ruff check src test Utilities
+
+Notes:
+
+* Only `src/` (the device library) is type-checked. `test/` and `Utilities/`
+  are host-side CPython scripts (unittest, argparse, os.path, cv2) which would
+  clash with the MicroPython-flavored typeshed; ruff lints them all.
+* `.typeshed/` is generated — re-run `./scripts/update-typeshed.sh` after
+  every update of `micropython-esp32-stubs`.
+* VSCode: with the Pylance and/or ty extensions, add to the workspace settings:
+
+      "settings": {
+          "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+          "ty.importStrategy": "fromEnvironment",
+          "basedpyright.importStrategy": "fromEnvironment"
+      }

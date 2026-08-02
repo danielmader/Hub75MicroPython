@@ -1,8 +1,8 @@
+import bouncer
 import hub75
 import matrixdata
 from logo import logo
 from planets import earth, saturn
-import bouncer
 
 ROW_SIZE = 32
 COL_SIZE = 64

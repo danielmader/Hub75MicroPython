@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
-import os
-import numpy as np
-import cv2
 import argparse
+import os
+import sys
+
+import cv2
+import numpy as np
+
 
 class Configs:
     def __init__(self):
@@ -98,9 +100,9 @@ def run(image_path, configs):
                 img_out = ConvertImage(file_path, configs)
 
                 PrintImageList(img_out, out=out_file)
-                out_file.write(f",\n")
+                out_file.write(",\n")
 
-            out_file.write(f"]\n")
+            out_file.write("]\n")
         else:
             out_file.write(f"{configs.variable_name} = ")
             img_out = ConvertImage(image_path, configs)

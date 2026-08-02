@@ -1,5 +1,11 @@
 *.directory
 *.pyc
-__pychache__/
+__pycache__/
 
 *.zip
+
+## Development environment (see README: Development)
+.venv/
+.typeshed/
+.ruff_cache/
+*.code-workspace

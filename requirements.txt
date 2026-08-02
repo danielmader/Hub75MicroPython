@@ -1,0 +1,9 @@
+micropython-esp32-stubs
+basedpyright
+ty
+ruff
+mpremote
+
+## for Utilities/ImageTo3BitList.py
+numpy
+opencv-python-headless
